@@ -172,6 +172,13 @@ def get_weather_stats():
 if __name__ == '__main__':
     app.run(debug=True)
 
+'''
+For AWS deployment I would write the data first to an S3 directory. Then I would stand up a databse in AWS Athena V3 which runs on Trino.
+I would create the table/s in athena, either via a glue crawler or a DDL statement that drops and recreates, or merges the newly ingested data into the main data set.
+I would do the same for the statistic summary table by scheduling a CTAS job against the raw data. Finally I would create parametrized so called "named queries" for PAIL API use
+to retrieve desired data with fast SLA response. Alternatively one could deploy a serialized JSON version to DynamoDB, but my isntincts would gravitate towards Athena and Trino.
+'''
+
 
 
 
